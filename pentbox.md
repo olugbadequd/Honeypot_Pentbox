@@ -7,18 +7,7 @@ Many honeypots are set up by security researchers investigating malware threats,
 
 ### Different types of honeypot tech
 
-Several honeypot technologies in use include the following: 
-
-Malware honeypots: These use known replication and attack vectors to detect malware. For example, honeypots (e.g., Ghost) have been crafted to emulate as a USB storage device. If a machine is infected by malware that spreads via USB, the honeypot will trick the malware to infect the emulated device.
-
-Spam honeypots: These are used to emulate open mail relays and open proxies. Spammers will test the open mail relay by sending themselves an email first. If they succeed, they then send out large quantities of spam. This type of honeypot can detect and recognize this test and successfully block the massive volume of spam that follows.
-
-Database honeypot: Activities such as SQL injections can often go undetected by firewalls, so some organizations will use a database firewall, which can provide honeypot support to create decoy databases.
-
-Client honeypots: Most honeypots are servers listening for connections. Client honeypots actively seek out malicious servers that attack clients, monitoring for suspicious and unexpected modifications to the honeypot. These systems generally run on virtualization technology and have a containment strategy to minimize risk to the research team.
-
-Honeynets: Rather than being a single system, a honeynet is a network that can consist of multiple honeypots. Honeynets aim to strategically track the methods and motives of an attacker while containing all inbound and outbound traffic. 
-
+Several honeypot technologies in use include the following; malware honeypots, spam honeypots, database honeypot, client honeypots.
 
 ## **Benefits of a honeypot**
 
@@ -42,28 +31,28 @@ For this demonstration,
 
 Check the IP address of your Ubuntu machine using ifconfig. The IP address is 192.168.0.164.
 
-![Sample Image](images\Screenshot_1.png)
+![Sample Image](images/Screenshot_1.png)
 
 Ensure the ubuntu machine and the attacking machine (Kali Linux) are on the same network system.
 Arp-scan was run on the attacking machine to discover other machines/systems on the same network with the Kali machine. 
 Run nmap scan on the ubuntu IP address to see if any port is open. In this case, all the 1000 ports are closed.
 The nmap was run when the honeypot (pentbox) was not installed on the target machine.
 
-![Sample Image](images\Screenshot_2.png)
+![Sample Image](images/Screenshot_2.png)
 
 Open the terminal on the target machine and Install pentbox using this link below;
 
 wget http://downloads.sourceforge.net/project/pentbox18realised/pentbox-1.8.tar.gz
 
 
-![Sample Image](images\Screenshot_3.png)
+![Sample Image](images/Screenshot_3.png)
 
 Use the tar command to decompress the downloaded file. 
 
 `tar -zxvf pentbox-1.8.tar.gz`
 
 
-![Sample Image](images\Screenshot_4.png)
+![Sample Image](images/Screenshot_4.png)
 
 After decompressing the file, we now have new directory pentbox-1.8. 
 Change directory to pentbox-1.8 to see files and directories in it.
@@ -71,7 +60,7 @@ The pentbox software is the one with the .rb extension. Run it using ./
 
 `./pentbox.rb`
 
-![Sample Image](images\Screenshot_5.png)
+![Sample Image](images/Screenshot_5.png)
 
 The first one I ran did not work because It requires root privileges before you can run it.
 
@@ -79,7 +68,7 @@ sudo ./pentbox.rb
 
 Enter 3 to select honeypot.
 
-![Sample Image](images\Screenshot_6.png)
+![Sample Image](images/Screenshot_6.png)
 
 Enter 2 to select manual configuration, so that can specify the port to be used.
 FTP port was used in this case, so port 21 was entered. 
@@ -90,23 +79,23 @@ The default log file was used, log_honeypot.txt.
 You can enable sound alert if you want to be alerted whenever intrusion occurs.
 
 
-![Sample Image](images\Screenshot_7.png)
+![Sample Image](images/Screenshot_7.png)
 
 Run nmap scan again on the attacking machine against the target IP address.
 The FTP port is open. Connect to the ftp server.
 
 
-![Sample Image](images\Screenshot_8.png)
+![Sample Image](images/Screenshot_8.png)
 
 
 The connection was established and the pentbox detected the intrusion on the target machine. 
 The intrusion event was saved on log file which was saved on the log file, log_honeypot.txt.
 
-![Sample Image](images\Screenshot_9.png)
+![Sample Image](images/Screenshot_9.png)
 
 The intrusion recorded on the log file. The attacker's IP address with the date and time the intrusion occurred.
 
-![Sample Image](images\Screenshot_10.png)
+![Sample Image](images/Screenshot_10.png)
 
 ### **HTTP SERVER**
 
@@ -114,12 +103,11 @@ Using http port as decoy port, http port 80 was configured as the decoy port.
 Other entries were used as in previous steps.
 
 
-![Sample Image](images\Screenshot_11.png)
-
+![Sample Image](images/Screenshot_11.png)
 Run nmap scan again on the attacking machine against the target IP address.
 The http port is open. Connect to the http server.
 
-![Sample Image](images\Screenshot_12.png)
+![Sample Image](images/Screenshot_12.png)
 
 Go to the url http://192.168.0.164
 
@@ -127,31 +115,31 @@ The connection was established and the pentbox detected the intrusion on the tar
 The intrusion event was saved on log file, log_honeypot.txt.
 The false message can also be seen, "You are not allowed to access this port".
 
-![Sample Image](images\Screenshot_13.png)
+![Sample Image](images/Screenshot_13.png)
 
 The intrusion event, the user-agent (mozilla/5.0) used to access the http server was logged and the IP address of the attacker machine.
 
-![Sample Image](images\Screenshot_14.png)
+![Sample Image](images/Screenshot_14.png)
 
 ### **Telnet**
 Using telnet port as decoy port, telnet port 23 was configured as the decoy port.
 Other entries were used as in previous steps.
 
 
-![Sample Image](images\Screenshot_15.png)
+![Sample Image](images/Screenshot_15.png)
 
 Run nmap scan on the attacking machine against the target IP address.
 The telnet port is open. Connect to the telnet server.
 
-![Sample Image](images\Screenshot_16.png)
+![Sample Image](images/Screenshot_16.png)
 
 The connection was established and the pentbox detected the intrusion on the target machine. 
 The intrusion event was saved on log file, log_honeypot.txt.
 The false message can also be seen, "You are not allowed to access this system remotely".
 
-![Sample Image](images\Screenshot_17.png)
+![Sample Image](images/Screenshot_17.png)
 
 The intrusion event details were logged; date and time, attacker IP address.
 
-![Sample Image](images\Screenshot_18.png)
+![Sample Image](images/Screenshot_18.png)
 
